@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+    <!--lidar_link-->
+    <joint name="upper_connection_lidar_joint" type="fixed">
+        <parent link="upper_connection_link" />
+        <child link="lidar_link" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
+
+    <link name="lidar_link">
+        <visual>
+            <geometry>
+                <box size="0.0245 0.0374 0.0374" /> 
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="light_black" />
+        </visual>
+
+        <collision>
+            <geometry>
+                <box size="0.0245 0.0374 0.0374" /> 
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </collision>
+    </link>
+</robot>

@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+    
+    <!-- Init colour -->
+    <material name="black">
+      <color rgba="0.0 0.0 0.0 1.0"/>
+    </material>
+
+    <material name="dark">
+        <color rgba="0.3 0.3 0.3 1.0"/>
+    </material>
+
+    <material name="light_black">
+        <color rgba="0.4 0.4 0.4 1.0"/>
+    </material>
+
+    <material name="brown">
+    <color rgba="0.8706 0.8118 0.7647 1.0"/>
+    </material>   
+
+    <material name="blue">
+        <color rgba="0.0 0.0 0.8 1.0"/>
+    </material>
+
+    <material name="grey">
+        <color rgba="0.7 0.7 0.7 1" />
+    </material>
+
+    <material name="green">
+        <color rgba="0 0.6 0 1" />
+    </material>
+
+    <material name="white">
+        <color rgba="1 1 1 1" />
+    </material>
+
+
+    <!-- base_footprint -->
+    <link name="base_footprint" />
+
+    <!-- base_link -->
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint" />
+        <child link="base_link" />
+        <origin xyz="0 0 0.0935" rpy="0 0 0" />
+    </joint>
+
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.4 0.37 0.006" />  
+            </geometry>
+            <origin xyz="0 0 0.003" rpy="0 0 0" />
+            <material name="grey" />
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0.003" rpy="0 0 0" />
+            <geometry>
+                <box size="0.4 0.37 0.006" />  
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- upper_connection_link -->
+    <joint name="base_connection_link" type="fixed">
+        <parent link="base_link" />
+        <child link="upper_connection_link" />
+        <origin xyz="0.1875 0 0.029" rpy="0 0 0" />
+    </joint>
+
+    <link name="upper_connection_link">
+        <visual>
+            <geometry>
+                <box size="0.025 0.224 0.046" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="blue"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <box size="0.025 0.224 0.046" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </collision>
+    </link>
+
+    <!--sensor_link-->
+    <xacro:include filename="sensor.xacro" />
+
+    <!-- upper_link -->
+    <joint name="base_upper_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="upper_link" />
+        <origin xyz="-0.015 0 0.085" rpy="0 0 0" />
+    </joint>
+
+    <link name="upper_link">
+        <visual>
+            <geometry>
+                <box size="0.32 0.32 0.17" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="brown" />
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.32 0.32 0.17" />
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- left_connection_link -->
+    <joint name="base_left_connection_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="left_connection_link" />
+        <origin xyz="-0.149 0.1756 -0.036" rpy="0 0 0" />
+    </joint>
+
+    <link name="left_connection_link">
+        <visual>
+            <geometry>
+                <box size="0.0574 0.0292 0.072" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="white" />
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0574 0.0292 0.072" />
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- right_connection_link -->
+    <joint name="base_right_connection_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="right_connection_link" />
+        <origin xyz="-0.149 -0.1756 -0.036" rpy="0 0 0" />
+    </joint>
+
+    <link name="right_connection_link">
+        <visual>
+            <geometry>
+                <box size="0.0574 0.0292 0.072" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="white" />
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.0574 0.0292 0.072" />
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- caster_connection_link -->
+    <joint name="base_caster_connection_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="caster_connection_link" />
+        <origin xyz="0.181 0 -0.01275" rpy="0 0 0" />
+    </joint>
+
+    <link name="caster_connection_link">
+        <visual>
+            <geometry>
+                <box size="0.038 0.0375 0.0255" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="white" />
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.038 0.0375 0.0255" />
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- left_wheel -->
+    <joint name="left_connection_wheel_joint" type="continuous">
+        <parent link="left_connection_link" />
+        <child link="left_wheel" />
+        <origin xyz="0 0.0296 -0.007" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <link name="left_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.0575" length="0.03" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="1.57 0 0" />
+            <material name="green" />
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="1.57 0 0" />
+            <geometry>
+                <cylinder radius="0.0575" length="0.03" />
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- right_wheel -->
+    <joint name="right_connection_wheel_joint" type="continuous">
+        <parent link="right_connection_link" />
+        <child link="right_wheel" />
+        <origin xyz="0 -0.0296 -0.007" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <link name="right_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.0575" length="0.03" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="1.57 0 0" />
+            <material name="green" />
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="1.57 0 0" />
+            <geometry>
+                <cylinder radius="0.0575" length="0.03" />
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- caster_wheel -->
+    <joint name="caster_connection_wheel_joint" type="fixed">
+        <parent link="caster_connection_link" />
+        <child link="caster_wheel" />
+        <origin xyz="0 0 -0.04675" rpy="0 0 0" />
+    </joint>
+
+    <link name="caster_wheel">
+        <visual>
+            <geometry>
+                <sphere radius="0.0375" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="green" />
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.0375" />
+            </geometry>
+        </collision>
+    </link>
+
+</robot>
